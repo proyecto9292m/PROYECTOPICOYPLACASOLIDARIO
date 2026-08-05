@@ -1,0 +1,1258 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>VíaSegura | Guía profesional de movilidad y seguridad vial</title>
+    <meta name="description" content="Guía educativa profesional sobre movilidad vial, transporte público y seguridad vial en Colombia. Contenido 100% gratuito.">
+    <meta name="keywords" content="movilidad vial, transporte público, seguridad vial, educación vial, Colombia, peatones, ciclistas, conductores">
+    <meta name="author" content="VíaSegura">
+    <meta name="robots" content="index, follow">
+    <meta name="theme-color" content="#00271c">
+    <link rel="canonical" href="https://viasegura.lat/">
+    <link rel="icon" href="img/favicon.ico" type="image/x-icon">
+
+    <!-- Open Graph para redes sociales -->
+    <meta property="og:type" content="website">
+    <meta property="og:title" content="VíaSegura | Guía profesional de movilidad y seguridad vial">
+    <meta property="og:description" content="Aprende sobre movilidad vial, transporte público y seguridad vial. Contenido 100% gratuito y profesional.">
+    <meta property="og:url" content="https://viasegura.lat/">
+    <meta property="og:image" content="https://viasegura.lat/img/og-image.jpg">
+    <meta property="og:locale" content="es_CO">
+    <meta name="twitter:card" content="summary_large_image">
+
+    <style>
+        /* ============================================================
+           ESTILOS - VERSIÓN COMPACTA Y FUNCIONAL
+           ============================================================ */
+
+        /* ----- Reset y variables ----- */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        :root {
+            --color-primario: #00271c;
+            --color-primario-claro: #004d3a;
+            --color-secundario: #00b894;
+            --color-acento: #0984e3;
+            --color-peligro: #e17055;
+            --color-texto: #2d3436;
+            --color-texto-suave: #636e72;
+            --color-fondo: #ffffff;
+            --color-fondo-alt: #f8f9fa;
+            --color-borde: #dfe6e9;
+            --color-tarjeta: #ffffff;
+            --sombra: 0 4px 24px rgba(0, 39, 28, 0.06);
+            --sombra-fuerte: 0 12px 48px rgba(0, 39, 28, 0.12);
+            --radio: 16px;
+            --radio-sm: 10px;
+            --max-ancho: 1200px;
+            --transicion: 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+            --fuente: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+        }
+
+        body {
+            font-family: var(--fuente);
+            color: var(--color-texto);
+            background: var(--color-fondo);
+            line-height: 1.7;
+            font-size: 17px;
+            -webkit-font-smoothing: antialiased;
+        }
+
+        .contenedor {
+            width: 100%;
+            max-width: var(--max-ancho);
+            margin: 0 auto;
+            padding: 0 24px;
+        }
+
+        /* ============================================================
+           COOKIES BANNER - SIEMPRE VISIBLE AL INICIO
+           ============================================================ */
+        .cookie-overlay {
+            position: fixed;
+            inset: 0;
+            background: rgba(0, 0, 0, 0.6);
+            z-index: 9998;
+            backdrop-filter: blur(4px);
+            display: none;
+        }
+
+        .cookie-overlay.visible {
+            display: block;
+        }
+
+        .cookie-banner {
+            position: fixed;
+            inset: 0;
+            display: none;
+            align-items: center;
+            justify-content: center;
+            padding: 20px;
+            z-index: 9999;
+        }
+
+        .cookie-banner.visible {
+            display: flex;
+        }
+
+        .cookie-modal {
+            background: #ffffff;
+            max-width: 540px;
+            width: 100%;
+            padding: 48px 40px;
+            border-radius: var(--radio);
+            box-shadow: 0 24px 64px rgba(0, 0, 0, 0.25);
+            text-align: center;
+            border-top: 6px solid var(--color-primario);
+            animation: cookieAnim 0.5s ease;
+        }
+
+        @keyframes cookieAnim {
+            from {
+                transform: scale(0.9) translateY(20px);
+                opacity: 0;
+            }
+            to {
+                transform: scale(1) translateY(0);
+                opacity: 1;
+            }
+        }
+
+        .cookie-modal h2 {
+            font-size: 1.6rem;
+            margin-bottom: 12px;
+            color: var(--color-primario);
+            font-weight: 800;
+        }
+
+        .cookie-modal p {
+            font-size: 0.95rem;
+            color: var(--color-texto-suave);
+            margin-bottom: 28px;
+            line-height: 1.7;
+        }
+
+        .cookie-modal .cookie-actions {
+            display: flex;
+            gap: 14px;
+            justify-content: center;
+            flex-wrap: wrap;
+        }
+
+        .cookie-modal .cookie-actions .boton {
+            padding: 14px 36px;
+            border: none;
+            border-radius: 50px;
+            font-weight: 700;
+            font-size: 0.95rem;
+            cursor: pointer;
+            transition: all var(--transicion);
+            min-width: 150px;
+            font-family: var(--fuente);
+        }
+
+        .cookie-modal .cookie-actions .boton.aceptar {
+            background: #00271c;
+            color: #ffffff;
+            box-shadow: 0 4px 16px rgba(0, 39, 28, 0.25);
+        }
+
+        .cookie-modal .cookie-actions .boton.aceptar:hover {
+            background: #004d3a;
+            transform: translateY(-3px);
+            box-shadow: 0 8px 28px rgba(0, 39, 28, 0.35);
+        }
+
+        .cookie-modal .cookie-actions .boton.rechazar {
+            background: transparent;
+            color: #00271c;
+            border: 2px solid #00271c;
+        }
+
+        .cookie-modal .cookie-actions .boton.rechazar:hover {
+            background: #00271c;
+            color: #ffffff;
+            transform: translateY(-3px);
+            box-shadow: 0 8px 28px rgba(0, 39, 28, 0.15);
+        }
+
+        .cookie-modal .cookie-enlaces {
+            margin-top: 20px;
+            font-size: 0.82rem;
+            color: var(--color-texto-suave);
+        }
+
+        .cookie-modal .cookie-enlaces a {
+            color: var(--color-primario);
+            font-weight: 600;
+        }
+
+        .cookie-modal .cookie-enlaces a:hover {
+            text-decoration: underline;
+        }
+
+        body.cookie-locked {
+            overflow: hidden;
+        }
+
+        /* ============================================================
+           CONTENIDO PRINCIPAL - OCULTO HASTA ACCIÓN
+           ============================================================ */
+        .contenido-principal {
+            display: none;
+        }
+
+        .contenido-principal.visible {
+            display: block;
+            animation: fadeIn 0.6s ease;
+        }
+
+        @keyframes fadeIn {
+            from {
+                opacity: 0;
+                transform: translateY(20px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        /* ============================================================
+           HEADER - BÁSICO
+           ============================================================ */
+        .cabecera {
+            position: sticky;
+            top: 0;
+            background: rgba(255, 255, 255, 0.96);
+            backdrop-filter: blur(12px);
+            border-bottom: 1px solid rgba(0, 39, 28, 0.06);
+            z-index: 1000;
+        }
+
+        .barra-nav {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            padding: 14px 24px;
+            max-width: var(--max-ancho);
+            margin: 0 auto;
+        }
+
+        .logo {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            font-weight: 800;
+            font-size: 1.2rem;
+            color: var(--color-primario);
+            text-decoration: none;
+        }
+
+        .logo:hover {
+            text-decoration: none;
+        }
+
+        .logo-icono {
+            width: 42px;
+            height: 42px;
+            background: var(--color-primario);
+            color: #fff;
+            border-radius: 12px;
+            display: grid;
+            place-items: center;
+            font-size: 1.2rem;
+        }
+
+        .menu {
+            display: flex;
+            gap: 4px;
+            list-style: none;
+            margin: 0;
+            padding: 0;
+            align-items: center;
+        }
+
+        .menu a {
+            color: var(--color-texto);
+            padding: 8px 16px;
+            border-radius: var(--radio-sm);
+            font-size: 0.9rem;
+            font-weight: 600;
+            transition: all var(--transicion);
+            text-decoration: none;
+        }
+
+        .menu a:hover {
+            background: var(--color-fondo-alt);
+            color: var(--color-primario);
+        }
+
+        .menu a.activo {
+            color: var(--color-primario);
+        }
+
+        .boton-menu {
+            display: none;
+            background: none;
+            border: 2px solid var(--color-borde);
+            border-radius: var(--radio-sm);
+            padding: 8px 12px;
+            cursor: pointer;
+            font-size: 1.3rem;
+            color: var(--color-primario);
+        }
+
+        /* ============================================================
+           FRANJA DE VALORES
+           ============================================================ */
+        .franja-valores {
+            background: var(--color-secundario);
+            color: #00271c;
+            padding: 10px 0;
+            text-align: center;
+            font-weight: 700;
+            font-size: 0.85rem;
+        }
+
+        /* ============================================================
+           HERO
+           ============================================================ */
+        .hero {
+            background: linear-gradient(135deg, #00271c 0%, #004d3a 50%, #006b4f 100%);
+            color: #fff;
+            padding: 110px 0 90px;
+            text-align: center;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .hero::after {
+            content: '';
+            position: absolute;
+            bottom: -2px;
+            left: 0;
+            right: 0;
+            height: 100px;
+            background: var(--color-fondo);
+            clip-path: ellipse(70% 100% at 50% 100%);
+        }
+
+        .hero h1 {
+            color: #fff;
+            margin-bottom: 20px;
+            position: relative;
+            font-size: clamp(2.2rem, 5vw, 3.6rem);
+        }
+
+        .hero p.subtitulo {
+            font-size: clamp(1.05rem, 2vw, 1.3rem);
+            max-width: 720px;
+            margin: 0 auto 32px;
+            color: rgba(255, 255, 255, 0.85);
+        }
+
+        .hero-botones {
+            display: flex;
+            gap: 16px;
+            justify-content: center;
+            flex-wrap: wrap;
+            position: relative;
+        }
+
+        .boton {
+            display: inline-block;
+            padding: 14px 34px;
+            border-radius: 50px;
+            font-weight: 700;
+            font-size: 1rem;
+            border: none;
+            cursor: pointer;
+            transition: all var(--transicion);
+            text-decoration: none;
+            font-family: var(--fuente);
+        }
+
+        .boton:hover {
+            transform: translateY(-3px);
+            text-decoration: none;
+        }
+
+        .boton.primario {
+            background: #ffffff;
+            color: #00271c;
+            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.15);
+        }
+
+        .boton.primario:hover {
+            background: #e8f0ee;
+            box-shadow: 0 8px 32px rgba(0, 0, 0, 0.2);
+        }
+
+        .boton.secundario {
+            background: transparent;
+            color: #ffffff;
+            border: 2px solid rgba(255, 255, 255, 0.4);
+        }
+
+        .boton.secundario:hover {
+            background: rgba(255, 255, 255, 0.12);
+            border-color: #ffffff;
+        }
+
+        .hero-insignias {
+            display: flex;
+            gap: 12px;
+            justify-content: center;
+            flex-wrap: wrap;
+            margin-top: 44px;
+            position: relative;
+        }
+
+        .insignia {
+            background: rgba(255, 255, 255, 0.1);
+            border: 1px solid rgba(255, 255, 255, 0.2);
+            padding: 8px 20px;
+            border-radius: 50px;
+            font-size: 0.85rem;
+            font-weight: 600;
+            color: rgba(255, 255, 255, 0.9);
+        }
+
+        /* ============================================================
+           SECCIONES
+           ============================================================ */
+        .seccion {
+            padding: 80px 0;
+        }
+
+        .seccion:nth-child(even) {
+            background: var(--color-fondo-alt);
+        }
+
+        .seccion-encabezado {
+            max-width: 760px;
+            margin-bottom: 44px;
+        }
+
+        .etiqueta-seccion {
+            display: inline-block;
+            background: rgba(0, 39, 28, 0.08);
+            color: var(--color-primario);
+            font-weight: 700;
+            font-size: 0.75rem;
+            letter-spacing: 0.1em;
+            text-transform: uppercase;
+            padding: 6px 18px;
+            border-radius: 50px;
+            margin-bottom: 16px;
+            border: 1px solid rgba(0, 39, 28, 0.06);
+        }
+
+        h1 {
+            font-size: clamp(2.2rem, 5vw, 3.6rem);
+            font-weight: 800;
+        }
+
+        h2 {
+            font-size: clamp(1.6rem, 3vw, 2.4rem);
+            font-weight: 700;
+        }
+
+        h3 {
+            font-size: 1.25rem;
+            font-weight: 700;
+        }
+
+        p {
+            margin: 0 0 1.1rem;
+            color: var(--color-texto-suave);
+        }
+
+        /* ============================================================
+           TARJETAS
+           ============================================================ */
+        .rejilla {
+            display: grid;
+            gap: 24px;
+        }
+
+        .rejilla-2 {
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+        }
+        .rejilla-3 {
+            grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+        }
+        .rejilla-4 {
+            grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+        }
+
+        .tarjeta {
+            background: var(--color-tarjeta);
+            border: 1px solid var(--color-borde);
+            border-radius: var(--radio);
+            padding: 32px 28px;
+            box-shadow: var(--sombra);
+            transition: all var(--transicion);
+        }
+
+        .tarjeta:hover {
+            transform: translateY(-6px);
+            box-shadow: var(--sombra-fuerte);
+        }
+
+        .tarjeta .icono {
+            font-size: 2.4rem;
+            margin-bottom: 16px;
+            display: block;
+        }
+
+        .tarjeta h3 {
+            margin-bottom: 8px;
+        }
+
+        /* ============================================================
+           AVISOS
+           ============================================================ */
+        .aviso {
+            border-radius: var(--radio);
+            padding: 24px 30px;
+            border-left: 6px solid var(--color-secundario);
+            background: #f0faf8;
+            margin: 24px 0;
+        }
+
+        .aviso.info {
+            border-left-color: var(--color-acento);
+            background: #f0f7ff;
+        }
+
+        .aviso.exito {
+            border-left-color: var(--color-primario);
+            background: #e8f0ee;
+        }
+
+        .aviso.peligro {
+            border-left-color: var(--color-peligro);
+            background: #fdf0ed;
+        }
+
+        /* ============================================================
+           PIE DE PÁGINA
+           ============================================================ */
+        .pie {
+            background: var(--color-primario);
+            color: rgba(255, 255, 255, 0.85);
+            padding: 60px 0 28px;
+        }
+
+        .pie a {
+            color: #ffffff;
+            transition: opacity var(--transicion);
+        }
+
+        .pie a:hover {
+            opacity: 0.7;
+            text-decoration: none;
+        }
+
+        .pie-rejilla {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 32px;
+            margin-bottom: 32px;
+        }
+
+        .pie h4 {
+            color: #fff;
+            margin-bottom: 14px;
+        }
+
+        .pie p {
+            color: rgba(255, 255, 255, 0.7);
+        }
+
+        .pie ul {
+            list-style: none;
+            padding: 0;
+        }
+
+        .pie ul li {
+            margin-bottom: 6px;
+        }
+
+        .pie-legal {
+            border-top: 1px solid rgba(255, 255, 255, 0.1);
+            padding-top: 24px;
+            font-size: 0.85rem;
+            text-align: center;
+            color: rgba(255, 255, 255, 0.5);
+        }
+
+        .pie-legal a {
+            color: rgba(255, 255, 255, 0.7);
+            margin: 0 8px;
+        }
+
+        .pie-legal a:hover {
+            color: #fff;
+        }
+
+        /* ============================================================
+           RESPONSIVE
+           ============================================================ */
+        @media (max-width: 860px) {
+            .boton-menu {
+                display: block;
+            }
+
+            .menu {
+                position: absolute;
+                top: 70px;
+                left: 0;
+                right: 0;
+                flex-direction: column;
+                align-items: stretch;
+                background: #fff;
+                border-bottom: 1px solid var(--color-borde);
+                padding: 12px 20px;
+                display: none;
+                box-shadow: var(--sombra-fuerte);
+            }
+
+            .menu.abierto {
+                display: flex;
+            }
+
+            .menu a {
+                padding: 12px 16px;
+            }
+
+            .hero {
+                padding: 80px 0 60px;
+            }
+
+            .seccion {
+                padding: 56px 0;
+            }
+
+            .cookie-modal {
+                padding: 36px 28px;
+                margin: 16px;
+            }
+
+            .cookie-modal .cookie-actions .boton {
+                min-width: 130px;
+                padding: 12px 28px;
+                font-size: 0.9rem;
+            }
+        }
+
+        @media (max-width: 480px) {
+            .rejilla-2,
+            .rejilla-3,
+            .rejilla-4 {
+                grid-template-columns: 1fr;
+            }
+
+            .hero-insignias {
+                gap: 8px;
+            }
+
+            .insignia {
+                font-size: 0.75rem;
+                padding: 6px 14px;
+            }
+
+            .cookie-modal {
+                padding: 28px 20px;
+            }
+
+            .cookie-modal .cookie-actions {
+                flex-direction: column;
+            }
+
+            .cookie-modal .cookie-actions .boton {
+                width: 100%;
+                min-width: unset;
+            }
+        }
+    </style>
+
+    <!-- Google tag (gtag.js) -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=AW-18254896446">
+    </script>
+    <script>
+        window.dataLayer = window.dataLayer || [];
+
+        function gtag() {
+            dataLayer.push(arguments);
+        }
+        gtag('js', new Date());
+        gtag('config', 'AW-18254896446');
+        // Por defecto, denegar cookies hasta que el usuario acepte
+        gtag('consent', 'default', {
+            'ad_storage': 'denied',
+            'analytics_storage': 'denied'
+        });
+    </script>
+
+</head>
+
+<body>
+
+    <!-- ============================================================
+    COOKIES BANNER - SIEMPRE APARECE AL CARGAR
+    ============================================================ -->
+    <div id="cookie-overlay" class="cookie-overlay visible"></div>
+
+    <div id="aviso-cookies" class="cookie-banner visible" role="dialog" aria-modal="true">
+        <div class="cookie-modal">
+            <h2>Aviso de cookies</h2>
+            <p>
+                Utilizamos cookies para mejorar tu experiencia, mostrar publicidad personalizada
+                y analizar el tráfico de forma anónima.
+                <br><br>
+                Al aceptar, nos permites ofrecerte un contenido más relevante.
+                Puedes rechazar las cookies no esenciales en cualquier momento.
+            </p>
+            <div class="cookie-actions">
+                <button class="boton rechazar" id="btn-rechazar-cookies">Rechazar</button>
+                <button class="boton aceptar" id="btn-aceptar-cookies">Aceptar cookies</button>
+            </div>
+            <div class="cookie-enlaces">
+                <a href="privacidad.html">Política de Privacidad</a> ·
+                <a href="politicas-cookies.html">Política de Cookies</a>
+            </div>
+        </div>
+    </div>
+
+    <!-- ============================================================
+    CONTENIDO PRINCIPAL - OCULTO HASTA ACCIÓN
+    ============================================================ -->
+    <div class="contenido-principal" id="contenidoPrincipal">
+
+        <!-- HEADER -->
+        <header class="cabecera">
+            <nav class="barra-nav" aria-label="Navegación principal">
+                <a href="index.html" class="logo">
+                    <span class="logo-icono">🚦</span>
+                    <span>VíaSegura</span>
+                </a>
+                <button class="boton-menu" id="botonMenu" aria-label="Abrir menú" aria-expanded="false">☰</button>
+                <ul class="menu" id="menu">
+                    <li><a href="index.html" class="activo">Inicio</a></li>
+                    <li><a href="#que-es-movilidad">Movilidad</a></li>
+                    <li><a href="#transporte-publico">Transporte</a></li>
+                    <li><a href="#seguridad-vial">Seguridad</a></li>
+                    <li><a href="#glosario">Glosario</a></li>
+                    <li><a href="#faq">Preguntas</a></li>
+                    <li><a href="contacto.html">Contacto</a></li>
+                </ul>
+            </nav>
+        </header>
+
+        <!-- FRANJA DE VALORES -->
+        <div class="franja-valores">
+            📚 Guía 100% gratuita · Sin pagos · Sin donaciones · Contenido de libre acceso
+        </div>
+
+        <!-- MAIN -->
+        <main>
+
+            <!-- HERO -->
+            <section class="hero" id="inicio">
+                <div class="contenedor">
+                    <h1>Movilidad vial y transporte público en Colombia, explicados para todos</h1>
+                    <p class="subtitulo">
+                        Una guía educativa y profesional para entender cómo movernos mejor: cómo funciona
+                        el transporte público, qué es la seguridad vial y cómo cuidarnos en la calle.
+                    </p>
+                    <div class="hero-botones">
+                        <a href="#que-es-movilidad" class="boton primario">Comenzar a aprender</a>
+                        <a href="#indice" class="boton secundario">Ver todos los temas</a>
+                    </div>
+                    <div class="hero-insignias">
+                        <span class="insignia">🚌 Transporte público</span>
+                        <span class="insignia">🚸 Seguridad vial</span>
+                        <span class="insignia">🚲 Movilidad sostenible</span>
+                        <span class="insignia">🆓 Acceso libre</span>
+                    </div>
+                </div>
+            </section>
+
+            <!-- SOBRE ESTA GUÍA -->
+            <section class="seccion" id="sobre-esta-guia">
+                <div class="contenedor">
+                    <div class="seccion-encabezado">
+                        <span class="etiqueta-seccion">Sección 1 · Sobre esta guía</span>
+                        <h2>Un proyecto educativo, hecho para la comunidad</h2>
+                        <p>Antes de empezar, queremos ser totalmente transparentes contigo sobre qué es
+                        VíaSegura y, sobre todo, qué <strong>no</strong> es.</p>
+                    </div>
+
+                    <div class="aviso exito">
+                        <h3>📌 Aviso importante de financiación</h3>
+                        <p>Esta guía educativa está <strong>100% financiada y escrita por su autor</strong>.
+                        <strong>No se aceptan donaciones. No se procesan pagos. No se vende ningún producto
+                        ni servicio.</strong> Todo el contenido de VíaSegura es de
+                        <strong>libre acceso</strong> y siempre lo será.</p>
+                    </div>
+
+                    <div class="rejilla rejilla-3">
+                        <div class="tarjeta">
+                            <span class="icono">🎯</span>
+                            <h3>Nuestro objetivo</h3>
+                            <p>Reunir en un solo lugar información clara y útil sobre movilidad vial,
+                            transporte público y seguridad en la vía.</p>
+                        </div>
+                        <div class="tarjeta">
+                            <span class="icono">🤝</span>
+                            <h3>Para quién es</h3>
+                            <p>Para cualquier persona: estudiantes, familias, personas que empiezan a usar el
+                            transporte público, conductores nuevos y cualquiera que quiera moverse mejor.</p>
+                        </div>
+                        <div class="tarjeta">
+                            <span class="icono">💚</span>
+                            <h3>Sin ánimo de lucro</h3>
+                            <p>No buscamos ganar dinero. Es una iniciativa personal de divulgación para aportar
+                            algo positivo a nuestra comunidad.</p>
+                        </div>
+                    </div>
+
+                    <div class="aviso info">
+                        <h3>Aviso de contenido educativo</h3>
+                        <p>La información de este sitio es de carácter <strong>educativo y orientativo</strong>.
+                        No reemplaza la normativa oficial de tránsito, la señalización en la vía ni las
+                        indicaciones de las autoridades competentes.</p>
+                    </div>
+                </div>
+            </section>
+
+            <!-- ÍNDICE -->
+            <section class="seccion" id="indice" style="background: var(--color-fondo-alt);">
+                <div class="contenedor">
+                    <div class="seccion-encabezado">
+                        <span class="etiqueta-seccion">Sección 2 · Índice</span>
+                        <h2>Todos los temas de la guía</h2>
+                        <p>Esta guía está organizada en secciones. Puedes leerla de principio a fin o saltar
+                        directamente al tema que te interese.</p>
+                    </div>
+
+                    <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 12px;">
+                        <a href="#que-es-movilidad" style="display: flex; align-items: center; gap: 12px; background: #fff; border: 1px solid var(--color-borde); border-radius: var(--radio-sm); padding: 12px 16px; font-weight: 600; color: var(--color-texto); text-decoration: none;">¿Qué es la movilidad vial?</a>
+                        <a href="#movilidad-sostenible" style="display: flex; align-items: center; gap: 12px; background: #fff; border: 1px solid var(--color-borde); border-radius: var(--radio-sm); padding: 12px 16px; font-weight: 600; color: var(--color-texto); text-decoration: none;">Movilidad sostenible</a>
+                        <a href="#transporte-publico" style="display: flex; align-items: center; gap: 12px; background: #fff; border: 1px solid var(--color-borde); border-radius: var(--radio-sm); padding: 12px 16px; font-weight: 600; color: var(--color-texto); text-decoration: none;">Transporte público</a>
+                        <a href="#glosario" style="display: flex; align-items: center; gap: 12px; background: #fff; border: 1px solid var(--color-borde); border-radius: var(--radio-sm); padding: 12px 16px; font-weight: 600; color: var(--color-texto); text-decoration: none;">Glosario interactivo</a>
+                        <a href="#seguridad-vial" style="display: flex; align-items: center; gap: 12px; background: #fff; border: 1px solid var(--color-borde); border-radius: var(--radio-sm); padding: 12px 16px; font-weight: 600; color: var(--color-texto); text-decoration: none;">Seguridad vial</a>
+                        <a href="#faq" style="display: flex; align-items: center; gap: 12px; background: #fff; border: 1px solid var(--color-borde); border-radius: var(--radio-sm); padding: 12px 16px; font-weight: 600; color: var(--color-texto); text-decoration: none;">Preguntas frecuentes</a>
+                    </div>
+                </div>
+            </section>
+
+            <!-- ============================================================
+            SECCIÓN: ¿QUÉ ES LA MOVILIDAD VIAL?
+            ============================================================ -->
+            <section class="seccion" id="que-es-movilidad">
+                <div class="contenedor">
+                    <div class="seccion-encabezado">
+                        <span class="etiqueta-seccion">Sección 3 · Conceptos</span>
+                        <h2>¿Qué es la movilidad vial?</h2>
+                    </div>
+                    <p>La <strong>movilidad vial</strong> es la capacidad de las personas y los bienes para
+                    desplazarse de un lugar a otro dentro de un territorio, utilizando las vías y los distintos
+                    medios de transporte disponibles. No se trata solo de los carros: incluye caminar, montar
+                    en bicicleta, usar el transporte público, conducir una moto o un automóvil y mover
+                    mercancías.</p>
+
+                    <p>Cuando hablamos de movilidad, no pensamos únicamente en "ir rápido", sino en moverse de
+                    forma <strong>segura, eficiente, sostenible y accesible para todas las personas</strong>.</p>
+
+                    <h3>Los elementos de la movilidad</h3>
+                    <div class="rejilla rejilla-4">
+                        <div class="tarjeta">
+                            <span class="icono">🚶</span>
+                            <h3>Las personas</h3>
+                            <p>Quienes se desplazan: peatones, pasajeros, ciclistas y conductores.</p>
+                        </div>
+                        <div class="tarjeta">
+                            <span class="icono">🛣️</span>
+                            <h3>La infraestructura</h3>
+                            <p>Vías, andenes, ciclorrutas, paraderos, semáforos y señalización.</p>
+                        </div>
+                        <div class="tarjeta">
+                            <span class="icono">🚌</span>
+                            <h3>Los vehículos</h3>
+                            <p>Buses, autos, motos, bicicletas, patinetes y vehículos de carga.</p>
+                        </div>
+                        <div class="tarjeta">
+                            <span class="icono">📋</span>
+                            <h3>Las normas</h3>
+                            <p>Reglas de tránsito que ordenan la circulación y protegen a todos.</p>
+                        </div>
+                    </div>
+
+                    <h3>¿Por qué deberías conocer sobre movilidad?</h3>
+                    <ul style="list-style: none; padding: 0;">
+                        <li style="display: flex; gap: 12px; align-items: flex-start; margin-bottom: 10px;">✔ Porque todos los días te desplazas y tomar buenas decisiones te ahorra tiempo y dinero.</li>
+                        <li style="display: flex; gap: 12px; align-items: flex-start; margin-bottom: 10px;">✔ Porque entender las normas te ayuda a cuidar tu vida y la de los demás.</li>
+                        <li style="display: flex; gap: 12px; align-items: flex-start; margin-bottom: 10px;">✔ Porque una ciudadanía informada exige y construye mejores ciudades.</li>
+                        <li style="display: flex; gap: 12px; align-items: flex-start; margin-bottom: 10px;">✔ Porque la movilidad afecta el medio ambiente, la salud y la economía de todos.</li>
+                    </ul>
+                </div>
+            </section>
+
+            <!-- ============================================================
+            SECCIÓN: MOVILIDAD SOSTENIBLE
+            ============================================================ -->
+            <section class="seccion" id="movilidad-sostenible" style="background: var(--color-fondo-alt);">
+                <div class="contenedor">
+                    <div class="seccion-encabezado">
+                        <span class="etiqueta-seccion">Sección 4 · Sostenibilidad</span>
+                        <h2>La movilidad sostenible y sus pilares</h2>
+                        <p>Movernos sin comprometer la salud del planeta ni la de las próximas generaciones.</p>
+                    </div>
+
+                    <p>La <strong>movilidad sostenible</strong> busca satisfacer nuestras necesidades de
+                    desplazamiento reduciendo al máximo los impactos negativos: contaminación del aire, ruido,
+                    accidentes y consumo de energía.</p>
+
+                    <h3>Beneficios de una movilidad más sostenible</h3>
+                    <div class="rejilla rejilla-3">
+                        <div class="tarjeta"><span class="icono">🌳</span><h3>Aire más limpio</h3><p>Menos emisiones de gases contaminantes.</p></div>
+                        <div class="tarjeta"><span class="icono">❤️</span><h3>Mejor salud</h3><p>Caminar y pedalear previene enfermedades.</p></div>
+                        <div class="tarjeta"><span class="icono">💰</span><h3>Ahorro</h3><p>El transporte público es más económico que el carro.</p></div>
+                        <div class="tarjeta"><span class="icono">⏱️</span><h3>Menos trancones</h3><p>Más personas en menos vehículos significa calles más fluidas.</p></div>
+                        <div class="tarjeta"><span class="icono">🔇</span><h3>Menos ruido</h3><p>Ciudades más tranquilas y agradables.</p></div>
+                        <div class="tarjeta"><span class="icono">🤝</span><h3>Más equidad</h3><p>Garantiza que todas las personas puedan moverse.</p></div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- ============================================================
+            SECCIÓN: TRANSPORTE PÚBLICO
+            ============================================================ -->
+            <section class="seccion" id="transporte-publico">
+                <div class="contenedor">
+                    <div class="seccion-encabezado">
+                        <span class="etiqueta-seccion">Sección 5 · Transporte público</span>
+                        <h2>¿Cómo funciona el transporte público en Colombia?</h2>
+                        <p>Un panorama general antes de entrar en cada sistema y ciudad.</p>
+                    </div>
+
+                    <p>El transporte público en Colombia es el conjunto de servicios que permiten que las
+                    personas se desplacen pagando un pasaje, en vehículos compartidos operados de forma
+                    organizada. Es la columna vertebral de la movilidad en las ciudades.</p>
+
+                    <h3>Tipos de transporte público</h3>
+                    <div class="rejilla rejilla-2">
+                        <div class="tarjeta">
+                            <span class="icono">🚇</span>
+                            <h3>Transporte masivo</h3>
+                            <p>Sistemas de gran capacidad: metros y sistemas tipo BRT con carriles exclusivos.</p>
+                        </div>
+                        <div class="tarjeta">
+                            <span class="icono">🚌</span>
+                            <h3>Transporte colectivo</h3>
+                            <p>Buses y busetas que circulan por rutas urbanas en calles compartidas.</p>
+                        </div>
+                        <div class="tarjeta">
+                            <span class="icono">🚕</span>
+                            <h3>Transporte individual</h3>
+                            <p>Taxis y servicios autorizados de puerta a puerta.</p>
+                        </div>
+                        <div class="tarjeta">
+                            <span class="icono">🚐</span>
+                            <h3>Transporte intermunicipal</h3>
+                            <p>Buses que conectan ciudades y municipios desde terminales.</p>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- ============================================================
+            SECCIÓN: GLOSARIO
+            ============================================================ -->
+            <section class="seccion" id="glosario" style="background: var(--color-fondo-alt);">
+                <div class="contenedor">
+                    <div class="seccion-encabezado">
+                        <span class="etiqueta-seccion">Sección 6 · Glosario</span>
+                        <h2>Glosario de movilidad</h2>
+                        <p>Los términos más importantes para entender la movilidad vial.</p>
+                    </div>
+
+                    <div style="display: grid; gap: 12px;">
+                        <div style="background: #fff; border: 1px solid var(--color-borde); border-left: 5px solid var(--color-acento); border-radius: var(--radio-sm); padding: 16px 20px;">
+                            <dt style="font-weight: 800; color: var(--color-primario); font-size: 1.05rem;">Actor vial</dt>
+                            <dd style="margin: 0; color: var(--color-texto-suave);">Toda persona que interactúa en la vía: peatones, ciclistas, motociclistas, conductores y pasajeros.</dd>
+                        </div>
+                        <div style="background: #fff; border: 1px solid var(--color-borde); border-left: 5px solid var(--color-acento); border-radius: var(--radio-sm); padding: 16px 20px;">
+                            <dt style="font-weight: 800; color: var(--color-primario); font-size: 1.05rem;">BRT</dt>
+                            <dd style="margin: 0; color: var(--color-texto-suave);">Bus Rapid Transit: sistema de buses de alta capacidad que circulan por carriles exclusivos.</dd>
+                        </div>
+                        <div style="background: #fff; border: 1px solid var(--color-borde); border-left: 5px solid var(--color-acento); border-radius: var(--radio-sm); padding: 16px 20px;">
+                            <dt style="font-weight: 800; color: var(--color-primario); font-size: 1.05rem;">Peatón</dt>
+                            <dd style="margin: 0; color: var(--color-texto-suave);">Persona que se desplaza a pie por la vía.</dd>
+                        </div>
+                        <div style="background: #fff; border: 1px solid var(--color-borde); border-left: 5px solid var(--color-acento); border-radius: var(--radio-sm); padding: 16px 20px;">
+                            <dt style="font-weight: 800; color: var(--color-primario); font-size: 1.05rem;">Siniestro vial</dt>
+                            <dd style="margin: 0; color: var(--color-texto-suave);">Suceso en la vía que causa daños, lesiones o muertes. Se prefiere este término a "accidente".</dd>
+                        </div>
+                        <div style="background: #fff; border: 1px solid var(--color-borde); border-left: 5px solid var(--color-acento); border-radius: var(--radio-sm); padding: 16px 20px;">
+                            <dt style="font-weight: 800; color: var(--color-primario); font-size: 1.05rem;">SOAT</dt>
+                            <dd style="margin: 0; color: var(--color-texto-suave);">Seguro Obligatorio de Accidentes de Tránsito, que cubre atención a víctimas.</dd>
+                        </div>
+                        <div style="background: #fff; border: 1px solid var(--color-borde); border-left: 5px solid var(--color-acento); border-radius: var(--radio-sm); padding: 16px 20px;">
+                            <dt style="font-weight: 800; color: var(--color-primario); font-size: 1.05rem;">Transbordo</dt>
+                            <dd style="margin: 0; color: var(--color-texto-suave);">Cambio de una ruta o modo de transporte a otro dentro de un mismo viaje.</dd>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- ============================================================
+            SECCIÓN: SEGURIDAD VIAL
+            ============================================================ -->
+            <section class="seccion" id="seguridad-vial">
+                <div class="contenedor">
+                    <div class="seccion-encabezado">
+                        <span class="etiqueta-seccion">Sección 7 · Seguridad</span>
+                        <h2>¿Qué es la seguridad vial?</h2>
+                    </div>
+
+                    <p>La <strong>seguridad vial</strong> es el conjunto de acciones, normas y comportamientos
+                    orientados a <strong>prevenir los siniestros de tránsito y reducir sus consecuencias</strong>.</p>
+
+                    <p>Hoy se habla de la <strong>visión de cero muertes</strong> en las vías: la idea de que
+                    ninguna persona debería morir o quedar gravemente herida al desplazarse.</p>
+
+                    <div class="aviso peligro">
+                        <h3>¿Por qué decimos "siniestro" y no "accidente"?</h3>
+                        <p>La palabra "accidente" sugiere algo inevitable o producto del azar. La mayoría de los
+                        hechos de tránsito son <strong>prevenibles</strong>: tienen causas como el exceso de
+                        velocidad, el alcohol o la distracción.</p>
+                    </div>
+
+                    <h3>Los pilares de la seguridad vial</h3>
+                    <div class="rejilla rejilla-3">
+                        <div class="tarjeta"><span class="icono">🧠</span><h3>Comportamiento</h3><p>Educación y cultura vial.</p></div>
+                        <div class="tarjeta"><span class="icono">🛣️</span><h3>Vías seguras</h3><p>Infraestructura que perdona errores.</p></div>
+                        <div class="tarjeta"><span class="icono">🚗</span><h3>Vehículos seguros</h3><p>Vehículos en buen estado.</p></div>
+                        <div class="tarjeta"><span class="icono">🚑</span><h3>Atención oportuna</h3><p>Respuesta rápida tras un siniestro.</p></div>
+                        <div class="tarjeta"><span class="icono">📜</span><h3>Gestión y normas</h3><p>Leyes que ordenan el sistema.</p></div>
+                        <div class="tarjeta"><span class="icono">📊</span><h3>Datos y prevención</h3><p>Estudiar para evitar siniestros.</p></div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- ============================================================
+            SECCIÓN: PREGUNTAS FRECUENTES (FAQ)
+            ============================================================ -->
+            <section class="seccion" id="faq" style="background: var(--color-fondo-alt);">
+                <div class="contenedor">
+                    <div class="seccion-encabezado">
+                        <span class="etiqueta-seccion">Preguntas frecuentes</span>
+                        <h2>Preguntas frecuentes</h2>
+                    </div>
+
+                    <div style="border-radius: var(--radio); overflow: hidden;">
+                        <div style="border: 1px solid var(--color-borde); border-radius: var(--radio-sm); margin-bottom: 12px; background: #fff; overflow: hidden;">
+                            <button style="width: 100%; text-align: left; background: #fff; border: none; padding: 18px 24px; font-size: 1rem; font-weight: 700; color: var(--color-primario); cursor: pointer; font-family: var(--fuente);" onclick="this.nextElementSibling.style.maxHeight = this.nextElementSibling.style.maxHeight ? null : this.nextElementSibling.scrollHeight + 'px'; this.classList.toggle('activo');">
+                                ¿Esta página cobra por su contenido? <span style="float: right; font-size: 1.4rem;">+</span>
+                            </button>
+                            <div style="max-height: 0; overflow: hidden; transition: max-height 0.35s ease;">
+                                <div style="padding: 0 24px 20px;"><p>No. VíaSegura es <strong>100% gratuita</strong>. No se procesan pagos, no se aceptan donaciones y todo el contenido es de libre acceso.</p></div>
+                            </div>
+                        </div>
+
+                        <div style="border: 1px solid var(--color-borde); border-radius: var(--radio-sm); margin-bottom: 12px; background: #fff; overflow: hidden;">
+                            <button style="width: 100%; text-align: left; background: #fff; border: none; padding: 18px 24px; font-size: 1rem; font-weight: 700; color: var(--color-primario); cursor: pointer; font-family: var(--fuente);" onclick="this.nextElementSibling.style.maxHeight = this.nextElementSibling.style.maxHeight ? null : this.nextElementSibling.scrollHeight + 'px'; this.classList.toggle('activo');">
+                                ¿Quién financia este sitio? <span style="float: right; font-size: 1.4rem;">+</span>
+                            </button>
+                            <div style="max-height: 0; overflow: hidden; transition: max-height 0.35s ease;">
+                                <div style="padding: 0 24px 20px;"><p>Esta guía está <strong>financiada y escrita en su totalidad por su autor</strong>, como un aporte educativo a la comunidad, sin ánimo de lucro.</p></div>
+                            </div>
+                        </div>
+
+                        <div style="border: 1px solid var(--color-borde); border-radius: var(--radio-sm); margin-bottom: 12px; background: #fff; overflow: hidden;">
+                            <button style="width: 100%; text-align: left; background: #fff; border: none; padding: 18px 24px; font-size: 1rem; font-weight: 700; color: var(--color-primario); cursor: pointer; font-family: var(--fuente);" onclick="this.nextElementSibling.style.maxHeight = this.nextElementSibling.style.maxHeight ? null : this.nextElementSibling.scrollHeight + 'px'; this.classList.toggle('activo');">
+                                ¿La información reemplaza la normativa oficial? <span style="float: right; font-size: 1.4rem;">+</span>
+                            </button>
+                            <div style="max-height: 0; overflow: hidden; transition: max-height 0.35s ease;">
+                                <div style="padding: 0 24px 20px;"><p>No. El contenido es educativo y orientativo. La norma oficial en Colombia es el Código Nacional de Tránsito.</p></div>
+                            </div>
+                        </div>
+
+                        <div style="border: 1px solid var(--color-borde); border-radius: var(--radio-sm); margin-bottom: 12px; background: #fff; overflow: hidden;">
+                            <button style="width: 100%; text-align: left; background: #fff; border: none; padding: 18px 24px; font-size: 1rem; font-weight: 700; color: var(--color-primario); cursor: pointer; font-family: var(--fuente);" onclick="this.nextElementSibling.style.maxHeight = this.nextElementSibling.style.maxHeight ? null : this.nextElementSibling.scrollHeight + 'px'; this.classList.toggle('activo');">
+                                ¿Usan cookies? <span style="float: right; font-size: 1.4rem;">+</span>
+                            </button>
+                            <div style="max-height: 0; overflow: hidden; transition: max-height 0.35s ease;">
+                                <div style="padding: 0 24px 20px;"><p>Usamos cookies para mejorar tu experiencia. Puedes aceptarlas o rechazarlas en el banner.</p></div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="aviso exito" style="margin-top: 30px;">
+                        <h3>¿Te resultó útil esta guía?</h3>
+                        <p>Compártela con tu familia, tus amigos o tu comunidad. Difundir educación vial también
+                        salva vidas. Recuerda: es completamente gratis y de libre acceso.</p>
+                        <a href="contacto.html" class="boton primario" style="margin-top: 8px; display: inline-block;">Escríbenos tu opinión</a>
+                    </div>
+                </div>
+            </section>
+
+            <!-- DISCLAIMER FINAL -->
+            <section style="background: var(--color-primario); color: #eafff7; padding: 56px 0; text-align: center;">
+                <div class="contenedor" style="max-width: 820px; margin: 0 auto;">
+                    <h2 style="color:#fff;">Compromiso de transparencia</h2>
+                    <p style="font-size:1.1rem; color: rgba(255,255,255,0.85);">
+                        <strong>VíaSegura</strong> es una guía educativa
+                        <strong>100% financiada y escrita por su autor</strong>. No se aceptan donaciones, no se
+                        procesan pagos y no se vende ningún producto o servicio. Todo el contenido es de
+                        <strong>libre acceso</strong>.
+                    </p>
+                </div>
+            </section>
+
+        </main>
+
+        <!-- PIE DE PÁGINA -->
+        <footer class="pie">
+            <div class="contenedor">
+                <div class="pie-rejilla">
+                    <div>
+                        <h4>🚦 VíaSegura</h4>
+                        <p>Guía educativa y gratuita sobre movilidad vial, transporte público en Colombia y
+                        seguridad vial.</p>
+                    </div>
+                    <div>
+                        <h4>Temas principales</h4>
+                        <ul>
+                            <li><a href="#que-es-movilidad">Movilidad vial</a></li>
+                            <li><a href="#transporte-publico">Transporte público</a></li>
+                            <li><a href="#seguridad-vial">Seguridad vial</a></li>
+                            <li><a href="#glosario">Glosario</a></li>
+                        </ul>
+                    </div>
+                    <div>
+                        <h4>Información legal</h4>
+                        <ul>
+                            <li><a href="privacidad.html">Política de Privacidad</a></li>
+                            <li><a href="politicas-cookies.html">Política de Cookies</a></li>
+                            <li><a href="contacto.html">Contacto</a></li>
+                        </ul>
+                    </div>
+                    <div>
+                        <h4>Contacto</h4>
+                        <ul>
+                            <li>📧 <a href="mailto:contacto@viasegura.lat">contacto@viasegura.lat</a></li>
+                            <li>📞 Emergencias: 123</li>
+                        </ul>
+                    </div>
+                </div>
+                <div class="pie-legal">
+                    <p>© 2026 VíaSegura — Todos los derechos reservados.</p>
+                    <p>
+                        <a href="privacidad.html">Privacidad</a> ·
+                        <a href="politicas-cookies.html">Cookies</a> ·
+                        <a href="contacto.html">Contacto</a>
+                    </p>
+                </div>
+            </div>
+        </footer>
+
+    </div>
+    <!-- Fin del contenido principal -->
+
+    <!-- ============================================================
+    JAVASCRIPT - COOKIES Y FUNCIONALIDAD
+    ============================================================ -->
+    <script>
+        (function() {
+            'use strict';
+
+            // ----- COOKIES - SIEMPRE APARECE, NO GUARDA NADA -----
+            var overlay = document.getElementById('cookie-overlay');
+            var banner = document.getElementById('aviso-cookies');
+            var btnAceptar = document.getElementById('btn-aceptar-cookies');
+            var btnRechazar = document.getElementById('btn-rechazar-cookies');
+            var contenidoPrincipal = document.getElementById('contenidoPrincipal');
+
+            // Verificar que los elementos existen
+            if (!overlay || !banner || !btnAceptar || !btnRechazar || !contenidoPrincipal) {
+                console.error('Error: Elementos del banner de cookies no encontrados');
+                return;
+            }
+
+            // Asegurar que el banner está visible al cargar
+            overlay.classList.add('visible');
+            banner.classList.add('visible');
+            document.body.classList.add('cookie-locked');
+
+            function mostrarContenido() {
+                // Ocultar banner
+                overlay.classList.remove('visible');
+                banner.classList.remove('visible');
+                document.body.classList.remove('cookie-locked');
+
+                // Mostrar contenido principal
+                contenidoPrincipal.classList.add('visible');
+            }
+
+            // Evento Aceptar
+            btnAceptar.addEventListener('click', function() {
+                mostrarContenido();
+
+                // Activar Google Analytics
+                if (typeof gtag !== 'undefined') {
+                    gtag('consent', 'update', {
+                        'ad_storage': 'granted',
+                        'analytics_storage': 'granted'
+                    });
+                }
+                console.log('Cookies ACEPTADAS');
+            });
+
+            // Evento Rechazar
+            btnRechazar.addEventListener('click', function() {
+                mostrarContenido();
+
+                // Desactivar cookies de terceros
+                if (typeof gtag !== 'undefined') {
+                    gtag('consent', 'update', {
+                        'ad_storage': 'denied',
+                        'analytics_storage': 'denied'
+                    });
+                }
+                console.log('Cookies RECHAZADAS');
+            });
+
+            // ----- MENÚ MÓVIL -----
+            var botonMenu = document.getElementById('botonMenu');
+            var menu = document.getElementById('menu');
+
+            if (botonMenu && menu) {
+                botonMenu.addEventListener('click', function() {
+                    var abierto = menu.classList.toggle('abierto');
+                    botonMenu.setAttribute('aria-expanded', abierto ? 'true' : 'false');
+                });
+
+                menu.querySelectorAll('a').forEach(function(enlace) {
+                    enlace.addEventListener('click', function() {
+                        menu.classList.remove('abierto');
+                        botonMenu.setAttribute('aria-expanded', 'false');
+                    });
+                });
+            }
+
+        })();
+    </script>
+
+</body>
+</html>

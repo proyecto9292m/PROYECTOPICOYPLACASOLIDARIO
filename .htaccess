@@ -1,0 +1,47 @@
+# ============================================================
+# .htaccess - Optimización para VíaSegura
+# ============================================================
+
+# ----- Activar compresión Gzip -----
+<IfModule mod_deflate.c>
+    AddOutputFilterByType DEFLATE text/html text/css text/javascript application/javascript application/json
+</IfModule>
+
+# ----- Cache de archivos estáticos -----
+<IfModule mod_expires.c>
+    ExpiresActive On
+    ExpiresByType text/css "access plus 1 year"
+    ExpiresByType text/javascript "access plus 1 year"
+    ExpiresByType application/javascript "access plus 1 year"
+    ExpiresByType image/jpeg "access plus 1 year"
+    ExpiresByType image/png "access plus 1 year"
+    ExpiresByType image/webp "access plus 1 year"
+    ExpiresByType image/svg+xml "access plus 1 year"
+    ExpiresByType font/woff2 "access plus 1 year"
+</IfModule>
+
+# ----- Redirección a HTTPS -----
+<IfModule mod_rewrite.c>
+    RewriteEngine On
+    RewriteCond %{HTTPS} off
+    RewriteRule ^(.*)$ https://%{HTTP_HOST}/$1 [R=301,L]
+</IfModule>
+
+# ----- Redirección de www a no-www -----
+<IfModule mod_rewrite.c>
+    RewriteCond %{HTTP_HOST} ^www\.viasegura\.lat$ [NC]
+    RewriteRule ^(.*)$ https://viasegura.lat/$1 [R=301,L]
+</IfModule>
+
+# ----- Cabeceras de seguridad -----
+<IfModule mod_headers.c>
+    Header set X-Content-Type-Options "nosniff"
+    Header set X-Frame-Options "DENY"
+    Header set X-XSS-Protection "1; mode=block"
+    Header set Referrer-Policy "strict-origin-when-cross-origin"
+    Header set Permissions-Policy "geolocation=(), microphone=(), camera=()"
+</IfModule>
+
+# ----- Página de error personalizada -----
+ErrorDocument 404 /404.html
+ErrorDocument 500 /500.html

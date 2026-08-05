@@ -1,0 +1,125 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Contacto | VíaSegura</title>
+    <meta name="description" content="Contáctanos para cualquier consulta sobre movilidad vial, transporte público o seguridad vial en Colombia.">
+    <link rel="stylesheet" href="css/style.css">
+    <link rel="icon" href="img/favicon.ico" type="image/x-icon">
+</head>
+<body>
+
+    <!-- ============================================================
+    HEADER
+    ============================================================ -->
+    <header class="cabecera" id="cabecera">
+        <nav class="barra-nav" aria-label="Navegación principal">
+            <a href="index.html" class="logo">
+                <span class="logo-icono">🚦</span>
+                <span>VíaSegura</span>
+            </a>
+            <button class="boton-menu" id="botonMenu" aria-label="Abrir menú" aria-expanded="false">☰</button>
+            <ul class="menu" id="menu">
+                <li><a href="index.html">Inicio</a></li>
+                <li><a href="index.html#que-es-movilidad">Movilidad</a></li>
+                <li><a href="index.html#transporte-publico">Transporte</a></li>
+                <li><a href="index.html#seguridad-vial">Seguridad</a></li>
+                <li><a href="index.html#glosario">Glosario</a></li>
+                <li><a href="index.html#faq">Preguntas</a></li>
+                <li><a href="contacto.html" class="activo">Contacto</a></li>
+            </ul>
+        </nav>
+    </header>
+
+    <main>
+        <section class="seccion" style="padding-top: 120px;">
+            <div class="contenedor">
+                <div class="seccion-encabezado">
+                    <span class="etiqueta-seccion">Contacto</span>
+                    <h1>¿Tienes alguna pregunta?</h1>
+                    <p>Estamos aquí para ayudarte con cualquier consulta sobre movilidad vial, transporte público o seguridad vial.</p>
+                </div>
+
+                <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 48px; max-width: 900px; margin: 0 auto;">
+                    <div>
+                        <h3>📧 Correo electrónico</h3>
+                        <p><a href="mailto:contacto@viasegura.lat" style="font-size: 1.2rem; font-weight: 600;">contacto@viasegura.lat</a></p>
+                        <p style="margin-top: 16px;">Respondemos en un plazo máximo de 48 horas hábiles.</p>
+
+                        <h3 style="margin-top: 32px;">📞 Emergencias</h3>
+                        <p><strong style="font-size: 1.4rem; color: var(--color-peligro);">123</strong> - Línea única de emergencias en Colombia</p>
+                    </div>
+
+                    <div style="background: var(--color-fondo-alt); padding: 32px; border-radius: var(--radio);">
+                        <h3>Formulario de contacto</h3>
+                        <form action="#" method="POST" style="display: flex; flex-direction: column; gap: 16px;">
+                            <div>
+                                <label for="nombre" style="font-weight: 600; display: block; margin-bottom: 4px;">Nombre</label>
+                                <input type="text" id="nombre" name="nombre" required style="width: 100%; padding: 12px 16px; border: 1px solid var(--color-borde); border-radius: var(--radio-sm); font-size: 1rem; font-family: var(--fuente);">
+                            </div>
+                            <div>
+                                <label for="email" style="font-weight: 600; display: block; margin-bottom: 4px;">Correo electrónico</label>
+                                <input type="email" id="email" name="email" required style="width: 100%; padding: 12px 16px; border: 1px solid var(--color-borde); border-radius: var(--radio-sm); font-size: 1rem; font-family: var(--fuente);">
+                            </div>
+                            <div>
+                                <label for="mensaje" style="font-weight: 600; display: block; margin-bottom: 4px;">Mensaje</label>
+                                <textarea id="mensaje" name="mensaje" rows="5" required style="width: 100%; padding: 12px 16px; border: 1px solid var(--color-borde); border-radius: var(--radio-sm); font-size: 1rem; font-family: var(--fuente); resize: vertical;"></textarea>
+                            </div>
+                            <button type="submit" class="boton primario" style="align-self: flex-start;">Enviar mensaje</button>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <!-- ============================================================
+    PIE DE PÁGINA
+    ============================================================ -->
+    <footer class="pie">
+        <div class="contenedor">
+            <div class="pie-rejilla">
+                <div>
+                    <h4>🚦 VíaSegura</h4>
+                    <p>Guía educativa y gratuita sobre movilidad vial, transporte público en Colombia y seguridad vial.</p>
+                </div>
+                <div>
+                    <h4>Temas principales</h4>
+                    <ul>
+                        <li><a href="index.html#que-es-movilidad">Movilidad vial</a></li>
+                        <li><a href="index.html#transporte-publico">Transporte público</a></li>
+                        <li><a href="index.html#seguridad-vial">Seguridad vial</a></li>
+                        <li><a href="index.html#glosario">Glosario</a></li>
+                    </ul>
+                </div>
+                <div>
+                    <h4>Información legal</h4>
+                    <ul>
+                        <li><a href="privacidad.html">Política de Privacidad</a></li>
+                        <li><a href="politicas-cookies.html">Política de Cookies</a></li>
+                        <li><a href="contacto.html">Contacto</a></li>
+                    </ul>
+                </div>
+                <div>
+                    <h4>Contacto</h4>
+                    <ul>
+                        <li>📧 <a href="mailto:contacto@viasegura.lat">contacto@viasegura.lat</a></li>
+                        <li>📞 Emergencias: 123</li>
+                    </ul>
+                </div>
+            </div>
+            <div class="pie-legal">
+                <p>© 2026 VíaSegura — Todos los derechos reservados. Guía educativa gratuita y de libre acceso.</p>
+                <p>
+                    <a href="privacidad.html">Privacidad</a> ·
+                    <a href="politicas-cookies.html">Cookies</a> ·
+                    <a href="contacto.html">Contacto</a>
+                </p>
+            </div>
+        </div>
+    </footer>
+
+    <script src="js/main.js"></script>
+</body>
+</html>
