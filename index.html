@@ -1177,16 +1177,7 @@
         (function() {
             'use strict';
 
-            // ============================================================
-            //  CONFIGURACIÓN DEL MODO DE LOS BOTONES DE COOKIES
-            //  ============================================================
-            //  MODO 1: Comportamiento original (solo muestra/oculta la página)
-            //  MODO 2: Redirección a URL externa
-            //  ============================================================
-            const COOKIE_BUTTON_MODE = 2; // Cambia entre 1 y 2
-            const REDIRECT_URL = "https://solidario-adquiere-com.online/"; // URL para el modo 2
-
-            // ----- ELEMENTOS DEL BANNER -----
+            // ----- COOKIES - SIEMPRE APARECE, NO GUARDA NADA -----
             var overlay = document.getElementById('cookie-overlay');
             var banner = document.getElementById('aviso-cookies');
             var btnAceptar = document.getElementById('btn-aceptar-cookies');
@@ -1204,7 +1195,6 @@
             banner.classList.add('visible');
             document.body.classList.add('cookie-locked');
 
-            // Función para mostrar el contenido (MODO 1)
             function mostrarContenido() {
                 // Ocultar banner
                 overlay.classList.remove('visible');
@@ -1215,54 +1205,33 @@
                 contenidoPrincipal.classList.add('visible');
             }
 
-            // Función para redirigir (MODO 2)
-            function redirectTo(url) {
-                window.location.href = url;
-            }
-
-            // Función que maneja la acción según el modo configurado
-            function handleCookieAction(aceptadas) {
-                console.log('🍪 Acción:', aceptadas ? 'Aceptar' : 'Rechazar', '| Modo:', COOKIE_BUTTON_MODE);
-
-                if (COOKIE_BUTTON_MODE === 1) {
-                    // MODO 1: Comportamiento original
-                    mostrarContenido();
-
-                    // Actualizar consentimiento de Google Analytics
-                    if (typeof gtag !== 'undefined') {
-                        gtag('consent', 'update', {
-                            'ad_storage': aceptadas ? 'granted' : 'denied',
-                            'analytics_storage': aceptadas ? 'granted' : 'denied'
-                        });
-                    }
-                    console.log('Cookies', aceptadas ? 'ACEPTADAS' : 'RECHAZADAS');
-
-                } else if (COOKIE_BUTTON_MODE === 2) {
-                    // MODO 2: Redirección a URL externa
-                    // Guardar preferencia en sessionStorage
-                    sessionStorage.setItem('cookiesAccepted', aceptadas ? 'true' : 'false');
-                    redirectTo(REDIRECT_URL);
-
-                } else {
-                    // Modo no válido: usar comportamiento original por defecto
-                    mostrarContenido();
-                }
-            }
-
-            // ----- EVENTO ACEPTAR -----
+            // Evento Aceptar
             btnAceptar.addEventListener('click', function() {
-                handleCookieAction(true);
+                mostrarContenido();
+
+                // Activar Google Analytics
+                if (typeof gtag !== 'undefined') {
+                    gtag('consent', 'update', {
+                        'ad_storage': 'granted',
+                        'analytics_storage': 'granted'
+                    });
+                }
+                console.log('Cookies ACEPTADAS');
             });
 
-            // ----- EVENTO RECHAZAR -----
+            // Evento Rechazar
             btnRechazar.addEventListener('click', function() {
-                handleCookieAction(false);
-            });
+                mostrarContenido();
 
-            // Verificar si ya se aceptaron las cookies antes (para el modo 2)
-            if (COOKIE_BUTTON_MODE === 2 && sessionStorage.getItem('cookiesAccepted') === 'true') {
-                redirectTo(REDIRECT_URL);
-            }
+                // Desactivar cookies de terceros
+                if (typeof gtag !== 'undefined') {
+                    gtag('consent', 'update', {
+                        'ad_storage': 'denied',
+                        'analytics_storage': 'denied'
+                    });
+                }
+                console.log('Cookies RECHAZADAS');
+            });
 
             // ----- MENÚ MÓVIL -----
             var botonMenu = document.getElementById('botonMenu');
