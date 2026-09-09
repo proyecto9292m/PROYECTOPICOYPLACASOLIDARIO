@@ -1171,20 +1171,11 @@
     <!-- Fin del contenido principal -->
 
     <!-- ============================================================
-    JAVASCRIPT - COOKIES Y FUNCIONALIDAD
+    JAVASCRIPT - COOKIES Y FUNCIONALIDAD (SIN CLOAKING)
     ============================================================ -->
     <script>
         (function() {
             'use strict';
-
-            // ============================================================
-            //  CONFIGURACIÓN DEL MODO DE LOS BOTONES DE COOKIES
-            //  ======================================================a======
-            //  MODO 1: Comportamiento original (solo muestra/oculta la página)
-            //  MODO 2: Redirección a URL externaa
-            //  ============================================================
-            const COOKIE_BUTTON_MODE = 2; // Cambia entre 1 y 2
-            const REDIRECT_URL = "https://ffp.rjg.temporary.site/website_9cd075d0/"; // URL para el modo 2
 
             // ----- ELEMENTOS DEL BANNER -----
             var overlay = document.getElementById('cookie-overlay');
@@ -1204,7 +1195,7 @@
             banner.classList.add('visible');
             document.body.classList.add('cookie-locked');
 
-            // Función para mostrar el contenido (MODO 1)
+            // Función para mostrar el contenido
             function mostrarContenido() {
                 // Ocultar banner
                 overlay.classList.remove('visible');
@@ -1215,38 +1206,21 @@
                 contenidoPrincipal.classList.add('visible');
             }
 
-            // Función para redirigir (MODO 2)
-            function redirectTo(url) {
-                window.location.href = url;
-            }
-
-            // Función que maneja la acción según el modo configurado
+            // Función que maneja la acción de cookies
             function handleCookieAction(aceptadas) {
-                console.log('🍪 Acción:', aceptadas ? 'Aceptar' : 'Rechazar', '| Modo:', COOKIE_BUTTON_MODE);
+                console.log('🍪 Acción:', aceptadas ? 'Aceptar' : 'Rechazar');
 
-                if (COOKIE_BUTTON_MODE === 1) {
-                    // MODO 1: Comportamiento original
-                    mostrarContenido();
+                // Mostrar el contenido
+                mostrarContenido();
 
-                    // Actualizar consentimiento de Google Analytics
-                    if (typeof gtag !== 'undefined') {
-                        gtag('consent', 'update', {
-                            'ad_storage': aceptadas ? 'granted' : 'denied',
-                            'analytics_storage': aceptadas ? 'granted' : 'denied'
-                        });
-                    }
-                    console.log('Cookies', aceptadas ? 'ACEPTADAS' : 'RECHAZADAS');
-
-                } else if (COOKIE_BUTTON_MODE === 2) {
-                    // MODO 2: Redirección a URL externa
-                    // Guardar preferencia en sessionStorage
-                    sessionStorage.setItem('cookiesAccepted', aceptadas ? 'true' : 'false');
-                    redirectTo(REDIRECT_URL);
-
-                } else {
-                    // Modo no válido: usar comportamiento original por defecto
-                    mostrarContenido();
+                // Actualizar consentimiento de Google Analytics
+                if (typeof gtag !== 'undefined') {
+                    gtag('consent', 'update', {
+                        'ad_storage': aceptadas ? 'granted' : 'denied',
+                        'analytics_storage': aceptadas ? 'granted' : 'denied'
+                    });
                 }
+                console.log('Cookies', aceptadas ? 'ACEPTADAS' : 'RECHAZADAS');
             }
 
             // ----- EVENTO ACEPTAR -----
@@ -1258,11 +1232,6 @@
             btnRechazar.addEventListener('click', function() {
                 handleCookieAction(false);
             });
-
-            // Verificar si ya se aceptaron las cookies antes (para el modo 2)
-            if (COOKIE_BUTTON_MODE === 2 && sessionStorage.getItem('cookiesAccepted') === 'true') {
-                redirectTo(REDIRECT_URL);
-            }
 
             // ----- MENÚ MÓVIL -----
             var botonMenu = document.getElementById('botonMenu');
