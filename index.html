@@ -5,7 +5,6 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>VíaSegura | Guía profesional de movilidad y seguridad vial</title>
     <meta name="description" content="Guía educativa profesional sobre movilidad vial, transporte público y seguridad vial en Colombia. Contenido 100% gratuito.">
-    <meta name="keywords" content="movilidad vial, transporte público, seguridad vial, educación vial, Colombia, peatones, ciclistas, conductores">
     <meta name="author" content="VíaSegura">
     <meta name="robots" content="index, follow">
     <meta name="theme-color" content="#00271c">
@@ -71,7 +70,7 @@
         }
 
         /* ============================================================
-           COOKIES BANNER - SIEMPRE VISIBLE AL INICIO
+           COOKIES BANNER
            ============================================================ */
         .cookie-overlay {
             position: fixed;
@@ -201,7 +200,7 @@
         }
 
         /* ============================================================
-           CONTENIDO PRINCIPAL - OCULTO HASTA ACCIÓN
+           CONTENIDO PRINCIPAL
            ============================================================ */
         .contenido-principal {
             display: none;
@@ -224,7 +223,7 @@
         }
 
         /* ============================================================
-           HEADER - BÁSICO
+           HEADER
            ============================================================ */
         .cabecera {
             position: sticky;
@@ -685,35 +684,29 @@
     </style>
 
     <!-- Google tag (gtag.js) -->
-    <script async src="https://www.googletagmanager.com/gtag/js?id=AW-18254896446">
-    </script>
+    <script async src="https://www.googletagmanager.com/gtag/js?id=AW-18254896446"></script>
     <script>
         window.dataLayer = window.dataLayer || [];
-
-        function gtag() {
-            dataLayer.push(arguments);
-        }
+        function gtag() { dataLayer.push(arguments); }
         gtag('js', new Date());
         gtag('config', 'AW-18254896446');
-        // Por defecto, denegar cookies hasta que el usuario acepte
         gtag('consent', 'default', {
             'ad_storage': 'denied',
             'analytics_storage': 'denied'
         });
     </script>
-
 </head>
 
 <body>
 
     <!-- ============================================================
-    COOKIES BANNER - SIEMPRE APARECE AL CARGAR
+    COOKIES BANNER
     ============================================================ -->
     <div id="cookie-overlay" class="cookie-overlay visible"></div>
 
-    <div id="aviso-cookies" class="cookie-banner visible" role="dialog" aria-modal="true">
+    <div id="aviso-cookies" class="cookie-banner visible" role="dialog" aria-modal="true" aria-labelledby="cookie-titulo">
         <div class="cookie-modal">
-            <h2>Aviso de cookies</h2>
+            <h2 id="cookie-titulo">Aviso de cookies</h2>
             <p>
                 Utilizamos cookies para mejorar tu experiencia, mostrar publicidad personalizada
                 y analizar el tráfico de forma anónima.
@@ -733,7 +726,7 @@
     </div>
 
     <!-- ============================================================
-    CONTENIDO PRINCIPAL - OCULTO HASTA ACCIÓN
+    CONTENIDO PRINCIPAL
     ============================================================ -->
     <div class="contenido-principal" id="contenidoPrincipal">
 
@@ -1177,23 +1170,12 @@
         (function() {
             'use strict';
 
-            // ============================================================
-            //  CONFIGURACIÓN DEL MODO DE LOS BOTONES DE COOKIES
-            //  ============================================================
-            //  MODO 1: Comportamiento original (solo muestra/oculta la página)
-            //  MODO 2: Redirección a URL externa
-            //  ============================================================
-            const COOKIE_BUTTON_MODE = 2; // Cambia entre 1 y 2
-            const REDIRECT_URL = "https://picoplacahoypagacol.vercel.app/"; // URL para el modo 2
-
-            // ----- ELEMENTOS DEL BANNER -----
             var overlay = document.getElementById('cookie-overlay');
             var banner = document.getElementById('aviso-cookies');
             var btnAceptar = document.getElementById('btn-aceptar-cookies');
             var btnRechazar = document.getElementById('btn-rechazar-cookies');
             var contenidoPrincipal = document.getElementById('contenidoPrincipal');
 
-            // Verificar que los elementos existen
             if (!overlay || !banner || !btnAceptar || !btnRechazar || !contenidoPrincipal) {
                 console.error('Error: Elementos del banner de cookies no encontrados');
                 return;
@@ -1204,65 +1186,32 @@
             banner.classList.add('visible');
             document.body.classList.add('cookie-locked');
 
-            // Función para mostrar el contenido (MODO 1)
             function mostrarContenido() {
-                // Ocultar banner
                 overlay.classList.remove('visible');
                 banner.classList.remove('visible');
                 document.body.classList.remove('cookie-locked');
-
-                // Mostrar contenido principal
                 contenidoPrincipal.classList.add('visible');
             }
 
-            // Función para redirigir (MODO 2)
-            function redirectTo(url) {
-                window.location.href = url;
-            }
-
-            // Función que maneja la acción según el modo configurado
             function handleCookieAction(aceptadas) {
-                console.log('🍪 Acción:', aceptadas ? 'Aceptar' : 'Rechazar', '| Modo:', COOKIE_BUTTON_MODE);
+                mostrarContenido();
 
-                if (COOKIE_BUTTON_MODE === 1) {
-                    // MODO 1: Comportamiento original
-                    mostrarContenido();
-
-                    // Actualizar consentimiento de Google Analytics
-                    if (typeof gtag !== 'undefined') {
-                        gtag('consent', 'update', {
-                            'ad_storage': aceptadas ? 'granted' : 'denied',
-                            'analytics_storage': aceptadas ? 'granted' : 'denied'
-                        });
-                    }
-                    console.log('Cookies', aceptadas ? 'ACEPTADAS' : 'RECHAZADAS');
-
-                } else if (COOKIE_BUTTON_MODE === 2) {
-                    // MODO 2: Redirección a URL externa
-                    // Guardar preferencia en sessionStorage
-                    sessionStorage.setItem('cookiesAccepted', aceptadas ? 'true' : 'false');
-                    redirectTo(REDIRECT_URL);
-
-                } else {
-                    // Modo no válido: usar comportamiento original por defecto
-                    mostrarContenido();
+                if (typeof gtag !== 'undefined') {
+                    gtag('consent', 'update', {
+                        'ad_storage': aceptadas ? 'granted' : 'denied',
+                        'analytics_storage': aceptadas ? 'granted' : 'denied'
+                    });
                 }
+                console.log('Cookies', aceptadas ? 'ACEPTADAS' : 'RECHAZADAS');
             }
 
-            // ----- EVENTO ACEPTAR -----
             btnAceptar.addEventListener('click', function() {
                 handleCookieAction(true);
             });
 
-            // ----- EVENTO RECHAZAR -----
             btnRechazar.addEventListener('click', function() {
                 handleCookieAction(false);
             });
-
-            // Verificar si ya se aceptaron las cookies antes (para el modo 2)
-            if (COOKIE_BUTTON_MODE === 2 && sessionStorage.getItem('cookiesAccepted') === 'true') {
-                redirectTo(REDIRECT_URL);
-            }
 
             // ----- MENÚ MÓVIL -----
             var botonMenu = document.getElementById('botonMenu');
