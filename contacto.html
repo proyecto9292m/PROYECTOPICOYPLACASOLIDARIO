@@ -4,18 +4,249 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Contacto | VíaSegura</title>
-    <meta name="description" content="Contáctanos para cualquier consulta sobre movilidad vial, transporte público o seguridad vial en Colombia. Proyecto educativo administrado por Yonatan Posada Cardona.">
-    <meta name="author" content="Yonatan Posada Cardona">
+    <meta name="description" content="Contáctanos para cualquier consulta sobre movilidad vial, transporte público o seguridad vial en Colombia. Proyecto educativo administrado por Derwin Enrique Orozco Curvelo.">
+    <meta name="author" content="Derwin Enrique Orozco Curvelo">
     <meta name="robots" content="index, follow">
+    <meta name="theme-color" content="#00271c">
     <link rel="canonical" href="https://kind-cliff-074f6ad10.4.azurestaticapps.net/contacto.html">
-    <link rel="stylesheet" href="css/style.css">
     <link rel="icon" href="img/favicon.ico" type="image/x-icon">
+
+    <style>
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+
+        :root {
+            --color-primario: #00271c;
+            --color-primario-claro: #004d3a;
+            --color-secundario: #00b894;
+            --color-acento: #0984e3;
+            --color-peligro: #e17055;
+            --color-texto: #2d3436;
+            --color-texto-suave: #636e72;
+            --color-fondo: #ffffff;
+            --color-fondo-alt: #f8f9fa;
+            --color-borde: #dfe6e9;
+            --color-tarjeta: #ffffff;
+            --sombra: 0 4px 24px rgba(0, 39, 28, 0.06);
+            --sombra-fuerte: 0 12px 48px rgba(0, 39, 28, 0.12);
+            --radio: 16px;
+            --radio-sm: 10px;
+            --max-ancho: 1200px;
+            --transicion: 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+            --fuente: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+        }
+
+        body {
+            font-family: var(--fuente);
+            color: var(--color-texto);
+            background: var(--color-fondo);
+            line-height: 1.7;
+            font-size: 17px;
+            -webkit-font-smoothing: antialiased;
+        }
+
+        .contenedor {
+            width: 100%;
+            max-width: var(--max-ancho);
+            margin: 0 auto;
+            padding: 0 24px;
+        }
+
+        /* ===== HEADER ===== */
+        .cabecera {
+            position: sticky;
+            top: 0;
+            background: rgba(255, 255, 255, 0.96);
+            backdrop-filter: blur(12px);
+            border-bottom: 1px solid rgba(0, 39, 28, 0.06);
+            z-index: 1000;
+        }
+        .barra-nav {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            padding: 14px 24px;
+            max-width: var(--max-ancho);
+            margin: 0 auto;
+        }
+        .logo {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            font-weight: 800;
+            font-size: 1.2rem;
+            color: var(--color-primario);
+            text-decoration: none;
+        }
+        .logo-icono {
+            width: 42px;
+            height: 42px;
+            background: var(--color-primario);
+            color: #fff;
+            border-radius: 12px;
+            display: grid;
+            place-items: center;
+            font-size: 1.2rem;
+        }
+        .menu {
+            display: flex;
+            gap: 4px;
+            list-style: none;
+            margin: 0;
+            padding: 0;
+            align-items: center;
+        }
+        .menu a {
+            color: var(--color-texto);
+            padding: 8px 16px;
+            border-radius: var(--radio-sm);
+            font-size: 0.9rem;
+            font-weight: 600;
+            transition: all var(--transicion);
+            text-decoration: none;
+        }
+        .menu a:hover {
+            background: var(--color-fondo-alt);
+            color: var(--color-primario);
+        }
+        .menu a.activo { color: var(--color-primario); }
+        .boton-menu {
+            display: none;
+            background: none;
+            border: 2px solid var(--color-borde);
+            border-radius: var(--radio-sm);
+            padding: 8px 12px;
+            cursor: pointer;
+            font-size: 1.3rem;
+            color: var(--color-primario);
+        }
+
+        /* ===== FRANJA ===== */
+        .franja-valores {
+            background: var(--color-secundario);
+            color: #00271c;
+            padding: 10px 0;
+            text-align: center;
+            font-weight: 700;
+            font-size: 0.85rem;
+        }
+
+        /* ===== SECCIONES Y TARJETAS ===== */
+        .seccion { padding: 72px 0; }
+        .seccion-encabezado { max-width: 760px; margin: 0 auto 44px; text-align: center; }
+        .etiqueta-seccion {
+            display: inline-block;
+            background: rgba(0, 39, 28, 0.08);
+            color: var(--color-primario);
+            font-weight: 700;
+            font-size: 0.75rem;
+            letter-spacing: 0.1em;
+            text-transform: uppercase;
+            padding: 6px 18px;
+            border-radius: 50px;
+            margin-bottom: 16px;
+            border: 1px solid rgba(0, 39, 28, 0.06);
+        }
+        h1 { font-size: clamp(2rem, 4.5vw, 3.2rem); font-weight: 800; color: var(--color-primario); margin-bottom: 14px; }
+        h3 { font-size: 1.25rem; font-weight: 700; color: var(--color-primario); margin-bottom: 8px; }
+        p { margin: 0 0 1.1rem; color: var(--color-texto-suave); }
+
+        .rejilla { display: grid; gap: 24px; }
+        .rejilla-2 { grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); }
+        .tarjeta {
+            background: var(--color-tarjeta);
+            border: 1px solid var(--color-borde);
+            border-radius: var(--radio);
+            padding: 32px 28px;
+            box-shadow: var(--sombra);
+            transition: all var(--transicion);
+        }
+        .tarjeta:hover {
+            transform: translateY(-4px);
+            box-shadow: var(--sombra-fuerte);
+        }
+        .tarjeta .icono { font-size: 2.4rem; margin-bottom: 16px; display: block; }
+
+        .boton {
+            display: inline-block;
+            padding: 13px 30px;
+            border-radius: 50px;
+            font-weight: 700;
+            font-size: 0.96rem;
+            border: none;
+            cursor: pointer;
+            transition: all var(--transicion);
+            text-decoration: none;
+            font-family: var(--fuente);
+        }
+        .boton:hover { transform: translateY(-2px); text-decoration: none; }
+        .boton.primario {
+            background: var(--color-primario);
+            color: #ffffff;
+        }
+        .boton.primario:hover {
+            background: var(--color-primario-claro);
+        }
+
+        .aviso {
+            border-radius: var(--radio);
+            padding: 20px 24px;
+            border-left: 6px solid var(--color-secundario);
+            background: #f0faf8;
+        }
+        .aviso.info { border-left-color: var(--color-acento); background: #f0f7ff; }
+
+        /* ===== PIE ===== */
+        .pie {
+            background: var(--color-primario);
+            color: rgba(255, 255, 255, 0.85);
+            padding: 60px 0 28px;
+        }
+        .pie a { color: #ffffff; transition: opacity var(--transicion); text-decoration: none; }
+        .pie a:hover { opacity: 0.7; text-decoration: underline; }
+        .pie-rejilla {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 32px;
+            margin-bottom: 32px;
+        }
+        .pie h4 { color: #fff; margin-bottom: 14px; }
+        .pie p { color: rgba(255, 255, 255, 0.7); }
+        .pie ul { list-style: none; padding: 0; }
+        .pie ul li { margin-bottom: 6px; }
+        .pie-legal {
+            border-top: 1px solid rgba(255, 255, 255, 0.1);
+            padding-top: 24px;
+            font-size: 0.85rem;
+            text-align: center;
+            color: rgba(255, 255, 255, 0.5);
+        }
+        .pie-legal a { color: rgba(255, 255, 255, 0.7); margin: 0 8px; }
+        .pie-legal a:hover { color: #fff; }
+
+        @media (max-width: 860px) {
+            .boton-menu { display: block; }
+            .menu {
+                position: absolute;
+                top: 70px; left: 0; right: 0;
+                flex-direction: column;
+                align-items: stretch;
+                background: #fff;
+                border-bottom: 1px solid var(--color-borde);
+                padding: 12px 20px;
+                display: none;
+                box-shadow: var(--sombra-fuerte);
+            }
+            .menu.abierto { display: flex; }
+            .menu a { padding: 12px 16px; }
+            .seccion { padding: 48px 0; }
+        }
+        @media (max-width: 480px) {
+            .rejilla-2 { grid-template-columns: 1fr; }
+        }
+    </style>
 </head>
 <body>
 
-    <!-- ============================================================
-    HEADER
-    ============================================================ -->
     <header class="cabecera" id="cabecera">
         <nav class="barra-nav" aria-label="Navegación principal">
             <a href="index.html" class="logo">
@@ -35,8 +266,12 @@
         </nav>
     </header>
 
+    <div class="franja-valores">
+        📚 Guía 100% gratuita · Sin pagos · Sin donaciones · Contenido de libre acceso
+    </div>
+
     <main>
-        <section class="seccion" style="padding-top: 120px;">
+        <section class="seccion">
             <div class="contenedor">
                 <div class="seccion-encabezado">
                     <span class="etiqueta-seccion">Contacto</span>
@@ -52,15 +287,15 @@
                         <p>Respondemos consultas y comentarios sobre la guía educativa en un plazo máximo de 48 horas hábiles.</p>
 
                         <h3 style="margin-top: 28px;">👤 Responsable del proyecto</h3>
-                        <p style="margin-bottom: 4px;"><strong>Yonatan Posada Cardona</strong></p>
-                        <p style="margin-bottom: 0;">Barranquilla, Atlántico — Colombia</p>
+                        <p style="margin-bottom: 4px;"><strong>Derwin Enrique Orozco Curvelo</strong></p>
+                        <p style="margin-bottom: 0;">Colombia</p>
                     </div>
 
                     <div class="tarjeta">
                         <span class="icono">📞</span>
                         <h3>Canal de consulta y emergencias</h3>
                         <p>Para enviar una consulta directamente desde tu gestor de correo electrónico, utiliza el siguiente enlace:</p>
-                        <a href="mailto:seccionplenaria1@gmail.com?subject=Consulta%20V%C3%ADaSegura" class="boton primario" style="background: var(--color-primario); color: #ffffff; margin-bottom: 24px;">Escribir por correo</a>
+                        <a href="mailto:seccionplenaria1@gmail.com?subject=Consulta%20V%C3%ADaSegura" class="boton primario" style="margin-bottom: 24px;">Escribir por correo</a>
 
                         <div class="aviso info" style="margin: 0;">
                             <h3 style="margin-bottom: 6px;">Línea de emergencias en Colombia</h3>
@@ -72,15 +307,12 @@
         </section>
     </main>
 
-    <!-- ============================================================
-    PIE DE PÁGINA
-    ============================================================ -->
     <footer class="pie">
         <div class="contenedor">
             <div class="pie-rejilla">
                 <div>
                     <h4>🚦 VíaSegura</h4>
-                    <p>Guía educativa y gratuita sobre movilidad vial, transporte público en Colombia y seguridad vial, administrada por <strong>Yonatan Posada Cardona</strong>.</p>
+                    <p>Guía educativa y gratuita sobre movilidad vial, transporte público en Colombia y seguridad vial, administrada por <strong>Derwin Enrique Orozco Curvelo</strong>.</p>
                 </div>
                 <div>
                     <h4>Temas principales</h4>
@@ -102,15 +334,15 @@
                 <div>
                     <h4>Contacto</h4>
                     <ul>
-                        <li>Titular: Yonatan Posada Cardona</li>
-                        <li>Ciudad: Barranquilla, Colombia</li>
+                        <li>Titular: Derwin Enrique Orozco Curvelo</li>
+                        <li>País: Colombia</li>
                         <li>📧 <a href="mailto:seccionplenaria1@gmail.com">seccionplenaria1@gmail.com</a></li>
                         <li>📞 Emergencias: 123</li>
                     </ul>
                 </div>
             </div>
             <div class="pie-legal">
-                <p>© 2026 VíaSegura — Proyecto educativo de Yonatan Posada Cardona. Todos los derechos reservados. Guía educativa gratuita y de libre acceso.</p>
+                <p>© 2026 VíaSegura — Proyecto educativo de Derwin Enrique Orozco Curvelo. Todos los derechos reservados. Guía educativa gratuita y de libre acceso.</p>
                 <p>
                     <a href="privacidad.html">Privacidad</a> ·
                     <a href="politicas-cookies.html">Cookies</a> ·
@@ -120,6 +352,17 @@
         </div>
     </footer>
 
-    <script src="js/main.js"></script>
+    <script>
+        (function () {
+            const botonMenu = document.getElementById('botonMenu');
+            const menu = document.getElementById('menu');
+            if (botonMenu && menu) {
+                botonMenu.addEventListener('click', function () {
+                    const abierto = menu.classList.toggle('abierto');
+                    botonMenu.setAttribute('aria-expanded', abierto ? 'true' : 'false');
+                });
+            }
+        })();
+    </script>
 </body>
 </html>
